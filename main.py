@@ -17,3 +17,12 @@ print('Dependencies imported!')
 
 from process_data import *
 
+print('Preparing neural network...', end='\r')
+
+print('Compiling neural network...', end='\r')
+
+print('Training neural network... ', end='\r')
+
+print('Testing neural network...  ', end='\r')
+
+print('Neural network complete!')

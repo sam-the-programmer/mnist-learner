@@ -12,8 +12,8 @@ scaled_train_samples = []
 
 print('Collecting data...', end='\r')
 
-print('Parsing data...', end='\r')
+print('Parsing data...   ', end='\r')
 
-print('Shaping data...', end='\r')
+print('Shaping data...   ', end='\r')
 
 print('Data preprocessed!')
