@@ -1,2 +1,4 @@
-# MNIST-Learner
-A tensorflow.keras neural network to learn the MNIST handwritten character database.
+# MNIST Learner
+
+This MNIST learner is a deep artificial neural network (ANN) that uses the `tensoflow.keras` API
+in *Python*.
