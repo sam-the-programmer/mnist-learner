@@ -1,4 +1,4 @@
-print('Setting up dependencies...', end='\r')
+print('\nSetting up dependencies...', end='\r')
 
 import os
 import numpy as np
@@ -17,8 +17,19 @@ print('Dependencies imported!')
 from Data.process_data import *
 
 print('Preparing neural network...', end='\r')
+model = Sequential([
+    Dense(units = 16, activation = 'relu', input_shape = (784,)),
+    Dense(units = 16, activation = 'relu'                      ),
+    Dense(units = 10, activation = 'relu'                      )
+])
 
 print('Compiling neural network...', end='\r')
+
+model.compile(
+    optimizer = 'Adam',
+    loss = 'categorical_crossentropy',
+    metrics = ['accuracy']
+)
 
 print('Training neural network...', end='\r')
 
