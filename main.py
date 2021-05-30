@@ -20,10 +20,10 @@ from sklearn.metrics import confusion_matrix
 import itertools
 import matplotlib.pyplot as plt
 
-import Data.process_data as mnist # My data processing module for MNIST.csv
 
 print('Dependencies imported!     ')
 
+import Data.process_data as mnist # My data processing module for MNIST.csv
 
 print('Preparing neural network...', end='\r')
 
@@ -51,15 +51,15 @@ model.fit(
     epochs = 50,
     verbose = 2
 )
-
+print('\n')
 print('Testing neural network...', end='\r')
 
 
 
 print('Saving neural network... ', end='\r')
 
-if os.path.isfile('Models/MNIST Dense Model.h5') is False:
-    model.save('Models/MNIST Dense Model.h5')
+# if os.path.isfile('Models/MNIST Dense Model.h5') is False: # Only if you want to only save once
+model.save('Models/MNIST Dense Model.h5')
     
 print('Neural network saved!   ')
 
@@ -98,4 +98,4 @@ def plot_confusion_matrix(cm, classes, normalize=False, title='Confusion Matrix'
 
 print('Confusion matrix generated!   ')
 
-print('\nNeural network complete! ')
+print('\nNeural network running complete! ')
