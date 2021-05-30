@@ -8,20 +8,23 @@ Presently, this is under heavy developement, but so far, this is the state of th
 
  - Functioning training loop with accuracy of 89%
  - Efficient data parsing and manipulation
+ - Only have a dense layer model
+ - Not yet parsed testing data
+ - Not yet generated confusion matrices
 
 ------
 <br/>
 
-## Architecture
+## Network Architectures
 
-> **Input**
-> > 784 inputs
+### Dense
 
-> **Layer 1**
-> > 16 neurons
+**Input:** 784 inputs
 
-> **Layer 2**
-> > 16 neurons
+**Layer 1:** 16 neurons
 
-> **Output**
-> > 10 outputs
+**Layer 2:** 16 neurons
+
+**Output:** 10 outputs
+
+**Loss:** Sparse Categorical Cross Entropy
