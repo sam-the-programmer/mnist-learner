@@ -10,6 +10,7 @@ train_samples = []
 train_labels = []
 scaled_train_samples = []
 
+
 print('Collecting data...                            ', end='\r')
 with open('Data/MNIST.csv') as file:
     csv_data = csv.reader(file, delimiter=',')
@@ -20,7 +21,6 @@ with open('Data/MNIST.csv') as file:
 
 print('Parsing data...   ', end='\r')
 raw.pop(0)  # Remove headers from the dataset
-
 
 for image in raw:                     # Iterate through each image
     train_labels.append(image[0])     # Add label to label list
@@ -46,6 +46,7 @@ for label in range(len(train_labels)):
     
     else: raise TypeError(f'Label data type {str(type(train_labels[label]))[8 : len(str(type(train_labels[label])))-2]} is not allowed.')
 
+
 print('Shaping data...', end='\r')
 
 train_samples = np.array(train_samples)
@@ -54,6 +55,7 @@ train_labels, train_samples = shuffle(train_labels, train_samples)
 
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaled_train_samples = scaler.fit_transform(train_samples)
+
 
 print('Data preprocessed!')
 print(train_samples)
