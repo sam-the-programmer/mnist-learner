@@ -3,9 +3,12 @@ print('\nSetting up dependencies...', end='\r')
 import os
 import numpy as np
 
-os.environ['TF_CPP_MIN_LOG_LEVEL']  =  '3'
+# Prevent warnings if you haven't got NVIDIA CUDA toolkit
+# (I have not configured this for GPU running)
+
+os.environ['TF_CPP_MIN_LOG_LEVEL']  =  '3' 
 import tensorflow as tf
-os.environ['TF_CPP_MIN_LOG_LEVEL']  =  '0'
+os.environ['TF_CPP_MIN_LOG_LEVEL']  =  '0' # Reset console display settings
 
 from tensorflow import keras
 from tensorflow.keras.layers import Dense
@@ -17,9 +20,10 @@ from sklearn.metrics import confusion_matrix
 import itertools
 import matplotlib.pyplot as plt
 
+import Data.process_data as mnist # My data processing module for MNIST.csv
+
 print('Dependencies imported!     ')
 
-import Data.process_data as mnist
 
 print('Preparing neural network...', end='\r')
 
@@ -52,10 +56,16 @@ print('Testing neural network...', end='\r')
 
 
 
-print('Saving neural network... ')
+print('Saving neural network... ', end='\r')
+
+if os.path.isfile('Models/MNIST Dense Model.h5') is False:
+    model.save('Models/MNIST Dense Model.h5')
+    
 print('Neural network saved!   ')
 
-print('Generating confusion matrix...')
+
+print('Generating confusion matrix...', end='\r') # Not implemented yet
+
 def plot_confusion_matrix(cm, classes, normalize=False, title='Confusion Matrix', cmap=plt.cm.Blues):
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
@@ -83,8 +93,9 @@ def plot_confusion_matrix(cm, classes, normalize=False, title='Confusion Matrix'
     
 # cm = confusion_matrix(y_true=test_labels, y_pred=rounded_predictions)
 
-# cm_plot_labels = ['No Side Effects', 'Had Side Effects']
+# cm_plot_labels = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 # plot_confusion_matrix(cm=cm, classes=cm_plot_labels)
+
 print('Confusion matrix generated!   ')
 
 print('\nNeural network complete! ')

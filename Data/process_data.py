@@ -8,8 +8,8 @@ from sklearn.utils import shuffle
 raw = []
 train_samples = []
 train_labels = []
-test_samples = []
-test_labels = []
+# test_samples = []
+# test_labels = []
 scaled_train_samples = []
 
 
@@ -58,8 +58,8 @@ del train_samples[len(train_samples) - 335:]  # Get right size
 assert len(train_samples) == 19600
 assert len(train_labels) == 19600
 
-assert len(test_samples) == 19600
-assert len(test_labels) == 19600
+# assert len(test_samples) == 19600
+# assert len(test_labels) == 19600
 
 train_samples = np.array(train_samples)
 train_labels = np.array(train_labels)
