@@ -49,13 +49,18 @@ for label in range(len(train_labels)):
 
 print('Shaping data...', end='\r')
 
+del train_labels[len(train_labels) - 335:]    # Get right size
+del train_samples[len(train_samples) - 335:]  # Get right size
+
+assert len(train_samples) == 19600
+assert len(train_labels) == 19600
+
 train_samples = np.array(train_samples)
 train_labels = np.array(train_labels)
 train_labels, train_samples = shuffle(train_labels, train_samples)
 
 scaler = MinMaxScaler(feature_range=(0, 1))
-scaled_train_samples = scaler.fit_transform(train_samples)
+scaled_train_samples = scaler.fit_transform(train_samples.reshape(-1, 28))
 
 
 print('Data preprocessed!')
-print(train_samples)

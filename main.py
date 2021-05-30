@@ -12,11 +12,12 @@ from tensorflow.keras.layers import Activation, Dense
 from tensorflow.keras.metrics import *
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import Adam
-print('Dependencies imported!')
+print('Dependencies imported!     ')
 
-from Data.process_data import *
+import Data.process_data as mnist
 
 print('Preparing neural network...', end='\r')
+
 model = Sequential([
     Dense(units = 16, activation = 'relu', input_shape = (784,)),
     Dense(units = 16, activation = 'relu'                      ),
@@ -32,6 +33,15 @@ model.compile(
 )
 
 print('Training neural network...', end='\r')
+model.fit(
+    mnist.train_samples,
+    mnist.train_labels,
+    batch_size = 10,
+    validation_split = 0.1,
+    shuffle = True,
+    epochs = 1,
+    verbose = 2
+)
 
 print('Testing neural network...', end='\r')
 
