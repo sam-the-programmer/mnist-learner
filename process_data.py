@@ -10,9 +10,16 @@ train_samples = []
 train_labels = []
 scaled_train_samples = []
 
-print('Collecting data...', end='\r')
+print('Collecting data...                            ', end='\r')
+with open('Data/MNIST.csv') as file:
+    csv_data = csv.reader(file, delimiter=',')
+    
+    for row in csv_data:
+        raw.append(row)
+
 
 print('Parsing data...   ', end='\r')
+
 
 print('Shaping data...   ', end='\r')
 
