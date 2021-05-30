@@ -14,7 +14,6 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import Adam
 print('Dependencies imported!')
 
-
 from Data.process_data import *
 
 print('Preparing neural network...', end='\r')
