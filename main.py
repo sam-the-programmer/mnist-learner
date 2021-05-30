@@ -1,6 +1,7 @@
 print('\nSetting up dependencies...', end='\r')
 
 import os
+from pprint import pprint
 import numpy as np
 
 # Prevent warnings if you haven't got NVIDIA CUDA toolkit
@@ -22,6 +23,40 @@ import matplotlib.pyplot as plt
 
 
 print('Dependencies imported!     ')
+
+print('Generating methods and commands... ', end='\r')
+
+def plot_confusion_matrix(cm, classes, normalize=False, title='Confusion Matrix', cmap=plt.cm.Blues):
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        print('Normalized Confusion Matrix')
+    else:
+        print('Confusion Matrix without Normalization')
+    print(cm)
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, cm[i, j],
+            horizontalalignment="center",
+            color="white" if cm[i, j] > thresh else "black")
+
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+
+def show_data(array):
+    plt.imshow(array.reshape(28, 28), cmap=plt.cm.Blues, title='MNIST Character Image')
+    plt.show()
+
+print('Methods and commands generated!   ')
+
+
 
 import Data.process_data as mnist # My data processing module for MNIST.csv
 
@@ -66,31 +101,10 @@ print('Neural network saved!   ')
 
 print('Generating confusion matrix...', end='\r') # Not implemented yet
 
-def plot_confusion_matrix(cm, classes, normalize=False, title='Confusion Matrix', cmap=plt.cm.Blues):
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
-    plt.title(title)
-    plt.colorbar()
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
-    plt.yticks(tick_marks, classes)
+show_data(mnist.train_samples[0])
 
-    if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-        print('Normalized Confusion Matrix')
-    else:
-        print('Confusion Matrix without Normalization')
-    print(cm)
-    thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, cm[i, j],
-            horizontalalignment="center",
-            color="white" if cm[i, j] > thresh else "black")
 
-    plt.tight_layout()
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
-    
-    
+
 # cm = confusion_matrix(y_true=test_labels, y_pred=rounded_predictions)
 
 # cm_plot_labels = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
