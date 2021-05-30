@@ -19,8 +19,26 @@ with open('Data/MNIST.csv') as file:
 
 
 print('Parsing data...   ', end='\r')
+raw.pop(0)  # Remove headers from the dataset
 
 
-print('Shaping data...   ', end='\r')
+for image in raw:                     # Iterate through each image
+    train_labels.append([image[0]])   # Add label to label list
+    image.pop(0)                      # Remove from list of the image
+
+for image in raw:
+    train_samples.append(image)
+
+for image in range(len(train_samples)):
+    for pixel in range(len(train_samples[image])):
+        train_samples[image][pixel] = int(train_samples[image][pixel])
+
+for label in range(len(train_labels)):
+    for i in range(len(train_labels[label])):
+        train_labels[label][i] = int(train_labels[label][i])
+
+
+print('Shaping data...', end='\r')
+
 
 print('Data preprocessed!')

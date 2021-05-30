@@ -21,8 +21,8 @@ print('Preparing neural network...', end='\r')
 
 print('Compiling neural network...', end='\r')
 
-print('Training neural network... ', end='\r')
+print('Training neural network...', end='\r')
 
-print('Testing neural network...  ', end='\r')
+print('Testing neural network...', end='\r')
 
-print('Neural network complete!')
+print('Neural network complete! ')
