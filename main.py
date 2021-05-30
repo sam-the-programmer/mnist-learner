@@ -15,7 +15,7 @@ from tensorflow.keras.optimizers import Adam
 print('Dependencies imported!')
 
 
-from process_data import *
+from Data.process_data import *
 
 print('Preparing neural network...', end='\r')
 
