@@ -23,7 +23,7 @@ raw.pop(0)  # Remove headers from the dataset
 
 
 for image in raw:                     # Iterate through each image
-    train_labels.append([image[0]])   # Add label to label list
+    train_labels.append(image[0])     # Add label to label list
     image.pop(0)                      # Remove from list of the image
 
 for image in raw:
@@ -35,13 +35,25 @@ for image in range(len(train_samples)):
 
 # Turn all data and labels into integers
 for label in range(len(train_labels)):
+    
     if type(train_labels[label]) == list:
+        
         for i in range(len(train_labels[label])):
             train_labels[label][i] = int(train_labels[label][i])
-    elif type(train_labels[label]) == int:
+            
+    elif type(train_labels[label]) == int or type(train_labels[label]) == str:
         train_labels[label] = int(train_labels[label])
+    
+    else: raise TypeError(f'Label data type {str(type(train_labels[label]))[8 : len(str(type(train_labels[label])))-2]} is not allowed.')
 
 print('Shaping data...', end='\r')
 
+train_samples = np.array(train_samples)
+train_labels = np.array(train_labels)
+train_labels, train_samples = shuffle(train_labels, train_samples)
+
+scaler = MinMaxScaler(feature_range=(0, 1))
+scaled_train_samples = scaler.fit_transform(train_samples)
 
 print('Data preprocessed!')
+print(train_samples)
