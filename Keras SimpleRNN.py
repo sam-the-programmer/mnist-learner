@@ -1,5 +1,5 @@
 print('''\n\n===========================
-==      Dense Model      ==
+== Keras SimpleRNN Model ==
 ===========================''')
 
 print('\nSetting up dependencies...', end='\r')
@@ -16,7 +16,7 @@ import tensorflow as tf
 os.environ['TF_CPP_MIN_LOG_LEVEL']  =  '0' # Reset console display settings
 
 from tensorflow import keras
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dense, SimpleRNN
 from tensorflow.keras.metrics import *
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import Adam
@@ -62,14 +62,14 @@ print('Methods and commands generated!   ')
 
 
 
-import Data.process_data_dense as mnist # My data processing module for MNIST.csv
+import Data.process_data_rnn as mnist # My data processing module for MNIST.csv
 
 print('Preparing neural network...', end='\r')
 
 model = Sequential([
-    Dense(units = 32, activation = 'relu', input_shape = (784,)),
-    Dense(units = 16, activation = 'softplus'                  ),
-    Dense(units = 16, activation = 'relu'                      ),
+    Dense(units = 32, input_shape = (784,)),
+    SimpleRNN(units = 16    ),
+    SimpleRNN(units = 16),
     Dense(units = 10, activation = 'softmax'                   )
 ])
 
