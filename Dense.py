@@ -68,9 +68,9 @@ print('Preparing neural network...', end='\r')
 
 model = Sequential([
     Dense(units = 32, activation = 'relu', input_shape = (784,)),
-    Dense(units = 16, activation = 'softplus'                   ),
-    Dense(units = 16, activation = 'relu'                       ),
-    Dense(units = 10, activation = 'softmax'                    )
+    Dense(units = 16, activation = 'softplus'                  ),
+    Dense(units = 16, activation = 'relu'                      ),
+    Dense(units = 10, activation = 'softmax'                   )
 ])
 
 print('Compiling neural network...', end='\r')
