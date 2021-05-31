@@ -1,3 +1,5 @@
 .vscode
+.github
+.csv
 __pycache__
-*.h5
+*Model.h5

@@ -1,3 +1,7 @@
+print('''\n\n===========================
+==      Dense Model      ==
+===========================''')
+
 print('\nSetting up dependencies...', end='\r')
 
 import os
@@ -51,7 +55,7 @@ def plot_confusion_matrix(cm, classes, normalize=False, title='Confusion Matrix'
     plt.xlabel('Predicted label')
 
 def show_data(array):
-    plt.imshow(array.reshape(28, 28), cmap=plt.cm.Blues, title='MNIST Character Image')
+    plt.imshow(array.reshape(28, 28), cmap=plt.cm.Blues)
     plt.show()
 
 print('Methods and commands generated!   ')
@@ -63,9 +67,10 @@ import Data.process_data as mnist # My data processing module for MNIST.csv
 print('Preparing neural network...', end='\r')
 
 model = Sequential([
-    Dense(units = 16, activation = 'relu', input_shape = (784,)),
-    Dense(units = 16, activation = 'relu'                      ),
-    Dense(units = 10, activation = 'softmax'                   )
+    Dense(units = 32, activation = 'relu', input_shape = (784,)),
+    Dense(units = 16, activation = 'softplus'                   ),
+    Dense(units = 16, activation = 'relu'                       ),
+    Dense(units = 10, activation = 'softmax'                    )
 ])
 
 print('Compiling neural network...', end='\r')
@@ -76,7 +81,7 @@ model.compile(
     metrics = ['accuracy']
 )
 
-print('Training neural network...')
+print('Training neural network...\n')
 model.fit(
     mnist.train_samples,
     mnist.train_labels,
@@ -101,7 +106,7 @@ print('Neural network saved!   ')
 
 print('Generating confusion matrix...', end='\r') # Not implemented yet
 
-show_data(mnist.train_samples[0])
+show_data(mnist.train_samples[0]) # Just to test whether this works
 
 
 
@@ -109,6 +114,7 @@ show_data(mnist.train_samples[0])
 
 # cm_plot_labels = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 # plot_confusion_matrix(cm=cm, classes=cm_plot_labels)
+
 
 print('Confusion matrix generated!   ')
 

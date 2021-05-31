@@ -6,7 +6,7 @@ networks and convolutional networks to aim to read >97% accuracy on validation a
 
 Presently, this is under heavy developement, but so far, this is the state of the project:
 
- - Functioning training loop with accuracy of 91% in validation (95% in training), but this varies
+ - Functioning training loop with accuracy of 97% in validation (98% in training)
  - Efficient data parsing and manipulation
  - Only have a dense layer model
  - Not yet parsed testing data
@@ -18,9 +18,11 @@ Presently, this is under heavy developement, but so far, this is the state of th
 
 ## Network Architectures
 
+<br/>
+
+-----
+
 ### Dense
-The accuracy changes. On average it is about 87% accurate, but sometimes, it can be as low as 79%
-or as high as 95% on validation.
 
 **Input:** 784 inputs
 
