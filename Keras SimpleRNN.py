@@ -16,7 +16,7 @@ import tensorflow as tf
 os.environ['TF_CPP_MIN_LOG_LEVEL']  =  '0' # Reset console display settings
 
 from tensorflow import keras
-from tensorflow.keras.layers import Dense, SimpleRNN
+from tensorflow.keras.layers import Dense, LSTM
 from tensorflow.keras.metrics import *
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import Adam
@@ -67,9 +67,7 @@ import Data.process_data_rnn as mnist # My data processing module for MNIST.csv
 print('Preparing neural network...', end='\r')
 
 model = Sequential([
-    Dense(units = 32, input_shape = (784,)),
-    SimpleRNN(units = 16    ),
-    SimpleRNN(units = 16),
+    LSTM(units=16, input_shape=(392, 2)),
     Dense(units = 10, activation = 'softmax'                   )
 ])
 
