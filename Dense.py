@@ -104,11 +104,13 @@ model.save('Models/MNIST Dense Model.h5')
 print('Neural network saved!   ')
 
 
-print('Generating confusion matrix...', end='\r') # Not implemented yet
 
 show_data(mnist.train_samples[0]) # Just to test whether this works
 
+predictions = model(mnist.train_samples[0], training=False, input_shape=(784,))
+rounded_predictions = np.argmax(predictions, axis=-1)
 
+print(rounded_predictions)
 
 # cm = confusion_matrix(y_true=test_labels, y_pred=rounded_predictions)
 
