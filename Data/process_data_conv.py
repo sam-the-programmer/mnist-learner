@@ -67,7 +67,8 @@ train_labels, train_samples = shuffle(train_labels, train_samples)
 
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaled_train_samples = scaler.fit_transform(train_samples.reshape(-1, 784))
+scaled_train_samples = scaled_train_samples.reshape(28, 28, 28, 1, -1)
 
 
 print('Data preprocessed!')
-if __name__ == '__main__': print(train_samples)
+if __name__ == '__main__': print(scaled_train_samples[0].shape)
