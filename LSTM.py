@@ -1,24 +1,18 @@
-print('''\n\n===========================
-==      Dense Model      ==
-===========================''')
+print('''\n\n
+===================================
+==            LSTM Model         ==
+===================================''')
 
 print('\nSetting up dependencies...', end='\r')
 
 import os
-import random
+from pprint import pprint
 import numpy as np
 
-# Prevent warnings if you haven't got NVIDIA CUDA toolkit
-# (I have not configured this for GPU running)
-
-os.environ['TF_CPP_MIN_LOG_LEVEL']  =  '3' 
-import tensorflow as tf
-os.environ['TF_CPP_MIN_LOG_LEVEL']  =  '0' # Reset console display settings
-
-from tensorflow import keras
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dense, LSTM, Dropout
 from tensorflow.keras.metrics import *
 from tensorflow.keras.models import Sequential
+from tensorflow.keras.optimizers import Adam
 
 from sklearn.metrics import confusion_matrix
 import itertools
@@ -66,54 +60,46 @@ import Data.process_data_dense as mnist # My data processing module for MNIST.cs
 print('Preparing neural network...', end='\r')
 
 model = Sequential([
-    Dense(units = 32, activation = 'relu', input_shape = (784,)),
-    Dense(units = 16, activation = 'softplus'                  ),
-    Dense(units = 16, activation = 'relu'                      ),
-    Dense(units = 10, activation = 'softmax'                   )
+    LSTM(128, input_shape=(28, 28), activation='relu', return_sequences=True),
+    Dropout(0.2),
+    
+    LSTM(128, activation='relu', return_sequences=True),
+    Dropout(0.2),
+    
+    Dense(32, activation='relu'),
+    Dropout(0.2),
+    
+    Dense(10, activation='softmax')
 ])
 
 print('Compiling neural network...', end='\r')
 
+opt = Adam(lr=1e-3, decay=1e-5)
 model.compile(
-    optimizer = 'Adam',
+    optimizer = opt,
     loss = 'sparse_categorical_crossentropy',
     metrics = ['accuracy']
 )
 
 print('Training neural network...\n')
-history = model.fit(
-    mnist.train_samples,
+
+model.fit(
+    np.array(mnist.train_samples).reshape(-1, 28, 28),
     mnist.train_labels,
-    batch_size = 64,
     validation_split = 0.1,
-    shuffle = True,
-    epochs = 50,
-    verbose = 0
+    epochs = 1
 )
+
 print('\n')
-
-# plt.plot(history.history['loss'])
-# plt.plot(history.history['val_loss'])
-# plt.plot(history.history['accuracy'])
-# plt.plot(history.history['val_accuracy'])
-# plt.grid()
-# plt.show()
-
 print('Testing neural network...', end='\r')
 
-piece = random.randint(0, 100)
-predictions = model.predict(mnist.train_samples,verbose=1)
-show_data(mnist.train_samples[piece])
-#print(str(mnist.train_samples[piece]).replace('0', ' '))
-print(f'\nIt is a {np.argmax(predictions[piece])}\n')
 
 
 print('Saving neural network... ', end='\r')
 
-model.save('Models/MNIST Dense Model.h5')
+model.save('Models/MNIST ConvNet Model.h5')
     
 print('Neural network saved!   ')
-
 
 print('Confusion matrix generated!   ')
 
