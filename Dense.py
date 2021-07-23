@@ -80,6 +80,8 @@ model.compile(
     metrics = ['accuracy']
 )
 
+# SOME EDITED STUFF HERE
+
 print('Training neural network...\n')
 history = model.fit(
     mnist.train_samples,
