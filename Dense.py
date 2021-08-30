@@ -21,6 +21,7 @@ from tensorflow.keras.metrics import *
 from tensorflow.keras.models import Sequential
 
 from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
 import itertools
 import matplotlib.pyplot as plt
 
@@ -66,9 +67,9 @@ import Data.process_data_dense as mnist # My data processing module for MNIST.cs
 print('Preparing neural network...', end='\r')
 
 model = Sequential([
-    Dense(units = 32, activation = 'relu', input_shape = (784,)),
-    Dense(units = 16, activation = 'softplus'                  ),
-    Dense(units = 16, activation = 'relu'                      ),
+    Dense(units = 128, activation = 'relu', input_shape = (784,)),
+    Dense(units = 128, activation = 'softplus'                  ),
+    Dense(units = 64, activation = 'relu'                      ),
     Dense(units = 10, activation = 'softmax'                   )
 ])
 
@@ -80,8 +81,6 @@ model.compile(
     metrics = ['accuracy']
 )
 
-# SOME EDITED STUFF HERE
-
 print('Training neural network...\n')
 history = model.fit(
     mnist.train_samples,
@@ -90,23 +89,22 @@ history = model.fit(
     validation_split = 0.1,
     shuffle = True,
     epochs = 50,
-    verbose = 0
+    verbose = 2
 )
 print('\n')
 
-# plt.plot(history.history['loss'])
-# plt.plot(history.history['val_loss'])
-# plt.plot(history.history['accuracy'])
-# plt.plot(history.history['val_accuracy'])
-# plt.grid()
-# plt.show()
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.grid()
+plt.show()
 
 print('Testing neural network...', end='\r')
 
 piece = random.randint(0, 100)
 predictions = model.predict(mnist.train_samples,verbose=1)
 show_data(mnist.train_samples[piece])
-#print(str(mnist.train_samples[piece]).replace('0', ' '))
 print(f'\nIt is a {np.argmax(predictions[piece])}\n')
 
 
