@@ -1,8 +1,7 @@
 # MNIST Learner
 
 This MNIST learner is a deep artificial neural network (ANN) that uses the `tensoflow.keras` API
-in *Python*. The final aim of the project will be to compare ANNs using dense layers, recurrent
-networks and convolutional networks to aim to read >97% accuracy on validation and testing. I have
+in *Python*. The final aim of the project will be to compare ANNs using dense layers and convolutional networks to aim to read >97% accuracy on validation and testing. I have
 cut short the project at the dense ANN presently, but plan to continue this in the future after other
 projects of mine are complete.
 
